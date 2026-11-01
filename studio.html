@@ -1,0 +1,23 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0b0d12">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css"><script src="site.js"></script><script src="auth.js"></script><title>Insight Studio - Digital Dark Spot</title></head><body>
+<nav id="siteNav"></nav>
+<main class="wrap" id="studio">
+<section class="section"><h2 data-i18n="studio.title">Insight Studio</h2><p class="sub" data-i18n="studio.sub"></p></section>
+<section class="card"><h2 data-i18n="studio.goal">Your goal</h2><label class="sr" for="goal">Goal</label><textarea id="goal" rows="2" data-i18n-ph="studio.goalph"></textarea></section>
+<section class="card"><h2><span data-i18n="studio.src">Sources</span> <span class="count" id="count">0</span></h2>
+ <div class="field" style="margin-bottom:14px"><label for="up" data-i18n="studio.up"></label><input id="up" type="file" multiple accept=".txt,.md,.html,.htm,.csv,.json,.pdf,image/*"></div>
+ <form id="addForm" autocomplete="off"><div class="row"><div class="field grow"><label for="sTitle" data-i18n="studio.t"></label><input id="sTitle"></div><div class="field"><label for="sDate" data-i18n="studio.d"></label><input id="sDate" type="date"></div></div>
+ <div class="field"><label for="sText" data-i18n="studio.x"></label><textarea id="sText" rows="5"></textarea></div>
+ <div class="toolbar"><button class="btn" type="submit" data-i18n="studio.add"></button><button class="btn ghost" type="button" id="demoBtn" data-i18n="studio.demo"></button><button class="btn ghost" type="button" id="loadBtn" data-i18n="studio.load"></button><button class="btn ghost danger" type="button" id="clearBtn" data-i18n="studio.clear"></button><input type="file" id="loadFile" accept=".json" hidden></div></form>
+ <ul class="srclist" id="list"></ul></section>
+<div class="actions"><button class="btn primary" id="analyzeBtn" type="button"><span data-i18n="studio.go"></span> (Ctrl+Enter)</button></div>
+<div id="out" hidden></div>
+<section class="card noprint" id="aiCard" hidden><h2 data-i18n="res.ai"></h2>
+ <p class="hint">Optional. Works with any OpenAI-compatible chat endpoint that allows browser requests. Your key stays in this tab and is never saved. For a real product, send requests through your own server instead.</p>
+ <div class="row"><div class="field grow"><label for="aiPre">Free provider preset</label><select id="aiPre" style="width:100%;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit"><option value="">Custom</option><option value="groq">Groq (free, very fast)</option><option value="gemini">Google Gemini (AI Studio, free)</option><option value="or">OpenRouter (free models)</option><option value="proxy">My own proxy server (no key in browser)</option></select></div></div>
+ <p class="hint" id="aiHelp">Get a free key: Groq at console.groq.com/keys, Gemini at aistudio.google.com/apikey, OpenRouter at openrouter.ai/keys. Never put a key in your GitHub code.</p>
+ <div class="row"><div class="field grow"><label for="aiUrl">Endpoint</label><input id="aiUrl" value="https://api.openai.com/v1/chat/completions"></div><div class="field"><label for="aiModel">Model</label><input id="aiModel" placeholder="model name"></div></div>
+ <div class="row"><div class="field grow"><label for="aiKey">API key (leave empty when using your own proxy)</label><input id="aiKey" type="password" autocomplete="off"></div><button class="btn" id="aiBtn" type="button">Summarise</button></div><div id="aiOut"></div></section>
+</main><footer class="wrap foot">Findings are possible gaps, not verified facts. Confirm with the official source.</footer>
+<script src="analysis.js"></script><script src="studio.js"></script></body></html>

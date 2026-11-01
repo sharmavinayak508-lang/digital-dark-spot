@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign in - Digital Dark Spot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<script src="site.js"></script><script src="auth.js"></script>
+</head><body>
+<div class="login">
+  <div id="tswLogin"></div>
+  <section class="side">
+    <div class="logo"><span class="spot" aria-hidden="true"></span>Digital Dark Spot</div>
+    <h1>What are they <span class="hl">not telling you?</span></h1>
+    <p class="lead">Add any notice, offer or page. We show the missing fees, vague promises and facts that disagree, so you ask the right questions first.</p>
+    <p class="sample">The fee is <span class="gap draw" tabindex="0" data-gap="Gap: amount not stated">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> and you must apply by <span class="gap draw" tabindex="0" data-gap="Gap: no date given">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>.</p>
+    <div class="pills"><span>Gap score</span><span>Conflict finder</span><span>English + Hindi</span><span>Free AI summary</span></div>
+  </section>
+  <section class="form"><div class="box">
+    <h2>Welcome back</h2><p class="hint">Sign in to open your workspace.</p>
+    <form id="f" autocomplete="off">
+      <div class="field" style="margin-bottom:14px"><label for="u">Username</label><input id="u" required autocomplete="username"></div>
+      <div class="field pw" style="margin-bottom:16px"><label for="p">Password</label><input id="p" type="password" required autocomplete="current-password"><button class="btn ghost small" type="button" id="eye" aria-label="Show password">Show</button></div>
+      <button class="btn primary" type="submit">Sign in</button>
+      <p id="m" class="msg" role="status" style="margin:10px 0 0"></p>
+    </form>
+    <div class="demo"><b>Demo login</b>
+      <div>Username: <code>demo</code></div>
+      <div>Password: <code>dark2026</code></div>
+      <button class="btn small" type="button" id="fill" style="margin-top:8px">Fill demo login</button>
+    </div>
+  </div></section>
+</div>
+<script>
+DDST.mount(document.getElementById('tswLogin'));
+var f=document.getElementById('f'),u=document.getElementById('u'),p=document.getElementById('p'),m=document.getElementById('m');
+document.getElementById('fill').onclick=function(){u.value='demo';p.value='dark2026';m.textContent='';p.focus()};
+document.getElementById('eye').onclick=function(){var s=p.type==='password';p.type=s?'text':'password';this.textContent=s?'Hide':'Show'};
+f.onsubmit=function(e){e.preventDefault();
+  if(DDS.login(u.value.trim(),p.value)){m.className='msg ok';m.textContent='Signed in. Opening the project...';location.href='home.html'}
+  else{m.className='msg err';m.textContent='Wrong username or password. Use the demo login shown below the form.'}};
+</script></body></html>

@@ -1,0 +1,14 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Tests - Digital Dark Spot</title>
+<style>body{font:15px system-ui;padding:24px;background:#0b0d12;color:#e8ebf3}.ok{color:#34d399}.no{color:#f87171}</style></head><body>
+<h1>Analysis engine tests</h1><ul id="r"></ul><script src="analysis.js"></script><script>
+var A=DDSAnalysis,out=document.getElementById('r');
+function t(n,c){var li=document.createElement('li');li.className=c?'ok':'no';li.textContent=(c?'PASS ':'FAIL ')+n;out.appendChild(li)}
+t('parses ISO, long and dd/mm/yyyy dates',A.parseDates('2026-03-07 and 5th March 2026 and 12/03/2026').length===3);
+t('parses amounts',A.parseAmounts('Fee is Rs. 1,500 or $20').join()==='1500,20');
+t('keeps Rs. inside one sentence',A.sentences('The fee is Rs. 500. Apply online.').length===2);
+var r=A.analyze([{title:'a',text:'Applications close on 30 November 2026. The fee is Rs. 500.'},{title:'b',text:'The last date to apply is 15 December 2026. The fee is Rs. 750.'}],new Date('2026-11-01'));
+t('detects date and fee conflicts',r.conflicts.length===2);
+t('flags missing eligibility',r.gaps.some(function(g){return g.facet==='eligibility'}));
+t('flags old source',A.analyze([{title:'x',date:'2020-01-01',text:'Apply before 1 May 2030 online please.'}],new Date('2026-11-01')).stale.length===1);
+t('score stays 0-100',r.score>=0&&r.score<=100);
+</script></body></html>
